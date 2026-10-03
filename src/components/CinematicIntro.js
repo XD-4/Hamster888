@@ -26,6 +26,14 @@ export default function CinematicIntro({ onComplete }) {
   const buttonRef = useRef(null);
   const canvasRef = useRef(null);
   const progressRef = useRef(null);
+  const chipCoreRef = useRef(null);
+  const modelImgRef = useRef(null);
+  const finaleContainerRef = useRef(null);
+  const iotTextRef = useRef(null);
+  const finaleProduct1Ref = useRef(null);
+  const finaleProduct2Ref = useRef(null);
+  const finaleProduct3Ref = useRef(null);
+  const flashRef = useRef(null);
 
   const [isVisible, setIsVisible] = useState(true);
   const [hasStarted, setHasStarted] = useState(false);
@@ -117,7 +125,7 @@ export default function CinematicIntro({ onComplete }) {
 
     const master = gsap.timeline({
       onUpdate: () => {
-        const prog = Math.round((master.time() / 20) * 100);
+        const prog = Math.round((master.time() / 25) * 100);
         setProgress(Math.min(100, prog));
       },
       onComplete: () => {
@@ -128,7 +136,7 @@ export default function CinematicIntro({ onComplete }) {
     masterTimeline.current = master;
 
     // Helper to animate text chapters smoothly
-    const animateChapter = (badgeText, titleText, subText, accentColor) => {
+    const animateChapter = (badgeText, titleText, subText, accentColor, imageId) => {
       const ch = gsap.timeline();
       ch.to([badgeRef.current, titleRef.current, subRef.current], {
         opacity: 0,
@@ -143,6 +151,15 @@ export default function CinematicIntro({ onComplete }) {
           if (subRef.current) subRef.current.innerText = subText;
           if (logoRef.current && accentColor) {
             logoRef.current.style.boxShadow = `0 20px 60px ${accentColor}66, inset 0 0 30px rgba(255,255,255,0.05)`;
+          }
+
+          if (imageId) {
+            if (modelImgRef.current) modelImgRef.current.src = `/products/${imageId}.jpg`;
+            if (chipCoreRef.current) gsap.to(chipCoreRef.current, { opacity: 0, scale: 0.8, duration: 0.3 });
+            if (modelImgRef.current) gsap.to(modelImgRef.current, { opacity: 1, scale: 1, duration: 0.4, delay: 0.1 });
+          } else {
+            if (chipCoreRef.current) gsap.to(chipCoreRef.current, { opacity: 1, scale: 1, duration: 0.4, delay: 0.1 });
+            if (modelImgRef.current) gsap.to(modelImgRef.current, { opacity: 0, scale: 0.8, duration: 0.3 });
           }
         })
         .fromTo(
@@ -161,7 +178,8 @@ export default function CinematicIntro({ onComplete }) {
         '✦ PHASE 1 : SILICON & NEURAL CORE ✦',
         'Dual-Core Xtensa LX7 240MHz',
         'ชิปสถาปัตยกรรม Vector Machine สำหรับ AI TinyML & Vision บน Edge',
-        '#0071e3'
+        '#0071e3',
+        'esp32-s3-pro'
       ),
       0.5
     );
@@ -172,7 +190,8 @@ export default function CinematicIntro({ onComplete }) {
         '✦ PHASE 2 : SENSORS & VISION ✦',
         'Ultra High-Precision Sensors',
         '360° LiDAR ToF • BME688 AI Gas Sensor • LoRaWAN 15km Node',
-        '#30d158'
+        '#30d158',
+        'lidar-tof-matrix'
       ),
       4.5
     );
@@ -183,7 +202,8 @@ export default function CinematicIntro({ onComplete }) {
         '✦ PHASE 3 : POWER & RELIABILITY ✦',
         'Industrial Grade GaN Power',
         '65W GaN PD Fast Charge • Smart 4S LiFePO4 BMS • ESD Safe Package',
-        '#ff9f0a'
+        '#ff9f0a',
+        'smart-bms-gan-pack'
       ),
       9.0
     );
@@ -194,34 +214,99 @@ export default function CinematicIntro({ onComplete }) {
         '✦ PHASE 4 : ENTERPRISE READY ✦',
         'find IOT Pro Ecosystem',
         'ออกใบกำกับภาษีเต็มรูปแบบ 100% • จัดส่งด่วน 1-2 วันทั่วประเทศ',
-        '#bf5af2'
+        '#bf5af2',
+        null
       ),
       13.5
     );
 
-    // Chapter 5: 17.5s - 20s (Hyper-Drive Portal Zoom Out)
+    // Chapter 5: 17.5s - 22.5s (The Grand Finale - IOT)
     master.to(
-      logoRef.current,
+      [logoRef.current, contentRef.current],
       {
-        scale: 14,
         opacity: 0,
-        filter: 'blur(40px)',
-        duration: 2.2,
-        ease: 'expo.inOut',
+        scale: 1.2,
+        filter: 'blur(20px)',
+        duration: 0.8,
+        ease: 'power2.in',
       },
       17.5
     );
 
+    master.fromTo(
+      finaleContainerRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.1 },
+      17.4
+    );
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // Products flying in ONE BY ONE
+    // Product 1 (Left) at 17.6s
+    master.fromTo(
+      finaleProduct1Ref.current,
+      { scale: 0, opacity: 0, x: -vw, y: 0, rotation: -90 },
+      { scale: 1, opacity: 1, x: -vw * 0.25, y: 0, rotation: -15, duration: 1, ease: 'elastic.out(1, 0.7)' },
+      17.6
+    );
+    // Product 2 (Top) at 18.0s
+    master.fromTo(
+      finaleProduct2Ref.current,
+      { scale: 0, opacity: 0, x: 0, y: -vh, rotation: 90 },
+      { scale: 1.2, opacity: 1, x: 0, y: -vh * 0.25, rotation: 0, duration: 1, ease: 'elastic.out(1, 0.7)' },
+      18.0
+    );
+    // Product 3 (Right) at 18.4s
+    master.fromTo(
+      finaleProduct3Ref.current,
+      { scale: 0, opacity: 0, x: vw, y: 0, rotation: -90 },
+      { scale: 1, opacity: 1, x: vw * 0.25, y: 0, rotation: 15, duration: 1, ease: 'elastic.out(1, 0.7)' },
+      18.4
+    );
+
+    // Converge to center at 19.2s
     master.to(
-      contentRef.current,
+      [finaleProduct1Ref.current, finaleProduct2Ref.current, finaleProduct3Ref.current],
+      { x: 0, y: 0, scale: 0.3, rotation: 0, duration: 0.3, ease: 'power3.in' },
+      19.2
+    );
+
+    // The Explosion / Flash at 19.5s
+    master.fromTo(
+      flashRef.current,
+      { opacity: 1, scale: 1 },
+      { opacity: 0, scale: 2, duration: 1.5, ease: 'power3.out', immediateRender: false },
+      19.5
+    );
+
+    // Products Disappear completely at 19.5s
+    master.to(
+      [finaleProduct1Ref.current, finaleProduct2Ref.current, finaleProduct3Ref.current],
+      { scale: 0, opacity: 0, duration: 0.1 },
+      19.5
+    );
+
+    // IOT Text Appears with extreme Apple-style prominence (Titanium Metallic)
+    master.fromTo(
+      iotTextRef.current,
+      { scale: 0.5, filter: 'blur(40px)', opacity: 0 },
+      { scale: 1.15, filter: 'blur(0px)', opacity: 1, duration: 3.5, ease: 'power2.out' },
+      19.5
+    );
+
+    // Chapter 6: 22.5s - 25s (Hyper-Drive Portal Zoom Out)
+    master.to(
+      finaleContainerRef.current,
       {
+        scale: 4,
         opacity: 0,
-        scale: 1.3,
-        filter: 'blur(15px)',
-        duration: 1.8,
-        ease: 'power2.in',
+        filter: 'blur(30px)',
+        duration: 2.2,
+        ease: 'expo.inOut',
       },
-      17.8
+      22.5
     );
   };
 
@@ -293,7 +378,7 @@ export default function CinematicIntro({ onComplete }) {
       >
         {/* Brand Label */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', fontWeight: 600 }}>
-          <span style={{ color: '#0071e3' }}>●</span> find IOT 20s Keynote
+          <span style={{ color: '#0071e3' }}>●</span> find IOT 25s Keynote
         </div>
 
         {/* Skip Button with Glowing Ring */}
@@ -364,9 +449,9 @@ export default function CinematicIntro({ onComplete }) {
         <div
           ref={logoRef}
           style={{
-            width: '136px',
-            height: '136px',
-            borderRadius: '34px',
+            width: '280px',
+            height: '280px',
+            borderRadius: '64px',
             background: 'linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.85) 70%)',
             border: '1px solid rgba(255, 255, 255, 0.18)',
             borderTop: '1px solid rgba(255, 255, 255, 0.55)',
@@ -384,43 +469,64 @@ export default function CinematicIntro({ onComplete }) {
           <div
             style={{
               position: 'absolute',
-              inset: '-6px',
-              borderRadius: '40px',
+              inset: '-8px',
+              borderRadius: '72px',
               background: 'conic-gradient(from 0deg, transparent 0%, #0071e3 30%, #bf5af2 60%, #30d158 85%, transparent 100%)',
               animation: 'spinRing 5s linear infinite',
               mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
               WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
               WebkitMaskComposite: 'xor',
               maskComposite: 'exclude',
-              padding: '2px',
+              padding: '3px',
               opacity: 0.9,
             }}
           />
 
           {/* Chip Silicon Core */}
           <div
+            ref={chipCoreRef}
             style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '14px',
+              width: '100px',
+              height: '100px',
+              borderRadius: '24px',
               background: '#09090c',
               border: '1px solid rgba(41, 151, 255, 0.6)',
               boxShadow: '0 0 25px rgba(0, 113, 227, 0.8), inset 0 0 10px rgba(41, 151, 255, 0.4)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              position: 'relative',
+              zIndex: 1,
             }}
           >
             <div
               style={{
-                width: '20px',
-                height: '20px',
-                borderRadius: '5px',
+                width: '40px',
+                height: '40px',
+                borderRadius: '10px',
                 background: '#0071e3',
-                boxShadow: '0 0 18px #0071e3',
+                boxShadow: '0 0 30px #0071e3',
               }}
             />
           </div>
+
+          {/* Product Model Image Overlay */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={modelImgRef}
+            alt=""
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '64px',
+              opacity: 0,
+              zIndex: 2,
+              pointerEvents: 'none',
+              transform: 'scale(0.8)',
+            }}
+          />
         </div>
 
         {/* ── Dynamic Text Content Block (Animated per Chapter) ── */}
@@ -512,11 +618,100 @@ export default function CinematicIntro({ onComplete }) {
               }}
             >
               <Play size={18} fill="#fff" />
-              <span>เริ่มการนำเสนอ 20 วินาที (Enter Keynote)</span>
+              <span>Start</span>
               <Volume2 size={16} style={{ opacity: 0.75, marginLeft: '4px' }} />
             </button>
           </div>
         )}
+      </div>
+
+      {/* ── Finale Sequence ── */}
+      <div
+        ref={finaleContainerRef}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          opacity: 0,
+          pointerEvents: 'none',
+          zIndex: 20,
+        }}
+      >
+        <div
+          ref={iotTextRef}
+          style={{
+            fontSize: 'clamp(12rem, 32vw, 32rem)',
+            fontWeight: 900,
+            fontFamily: 'var(--font-display)',
+            letterSpacing: '-0.07em',
+            background: 'linear-gradient(110deg, #ffffff 0%, #e5e5ea 15%, #8e8e93 35%, #1c1c1e 50%, #8e8e93 65%, #e5e5ea 85%, #ffffff 100%)',
+            backgroundSize: '200% auto',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            textShadow: '0 30px 80px rgba(255,255,255,0.15)',
+            position: 'absolute',
+            zIndex: 1,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          IOT
+        </div>
+        
+        {/* Explosion Flash */}
+        <div
+          ref={flashRef}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: '#ffffff',
+            opacity: 0,
+            zIndex: 99,
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Floating Products */}
+        <div style={{ position: 'relative', width: '100%', height: '100%', zIndex: 2 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={finaleProduct1Ref}
+            src="/products/esp32-s3-pro.jpg"
+            alt=""
+            style={{
+              position: 'absolute', top: '50%', left: '50%',
+              width: 'clamp(140px, 20vw, 220px)', aspectRatio: '1/1', borderRadius: '40px', objectFit: 'cover',
+              transform: 'translate(-50%, -50%)',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0,113,227,0.5)',
+            }}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={finaleProduct2Ref}
+            src="/products/lidar-tof-matrix.jpg"
+            alt=""
+            style={{
+              position: 'absolute', top: '50%', left: '50%',
+              width: 'clamp(180px, 25vw, 280px)', aspectRatio: '1/1', borderRadius: '50px', objectFit: 'cover',
+              transform: 'translate(-50%, -50%)',
+              boxShadow: '0 40px 80px rgba(0,0,0,0.9), 0 0 40px rgba(48,209,88,0.5)',
+              zIndex: 3,
+            }}
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            ref={finaleProduct3Ref}
+            src="/products/smart-bms-gan-pack.jpg"
+            alt=""
+            style={{
+              position: 'absolute', top: '50%', left: '50%',
+              width: 'clamp(140px, 20vw, 220px)', aspectRatio: '1/1', borderRadius: '40px', objectFit: 'cover',
+              transform: 'translate(-50%, -50%)',
+              boxShadow: '0 30px 60px rgba(0,0,0,0.8), 0 0 30px rgba(255,159,10,0.5)',
+            }}
+          />
+        </div>
       </div>
 
       <style>{`
