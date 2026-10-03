@@ -84,6 +84,7 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeCodeTab, setActiveCodeTab] = useState('esp32');
   const overlayRef = useRef(null);
 
   useEffect(() => {
@@ -321,6 +322,82 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
           </div>
 
           {/* Spacer for sticky bar */}
+          <div style={{ height: 40 }} />
+
+          {/* ── CODE EXAMPLES ── */}
+          <div style={{ marginBottom: 40 }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-primary)', marginBottom: 16 }}>
+              Code Examples & Setup
+            </div>
+            <div style={{ background: 'var(--bg-elevated)', borderRadius: 16, overflow: 'hidden', border: '1px solid var(--border)' }}>
+              
+              {/* Tabs */}
+              <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', background: 'rgba(0,0,0,0.02)' }}>
+                <button
+                  onClick={() => setActiveCodeTab('esp32')}
+                  style={{
+                    flex: 1, padding: '12px 0', border: 'none', background: activeCodeTab === 'esp32' ? 'var(--bg-elevated)' : 'transparent',
+                    color: activeCodeTab === 'esp32' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    fontWeight: activeCodeTab === 'esp32' ? 700 : 500, fontSize: '0.85rem', cursor: 'pointer',
+                    borderBottom: activeCodeTab === 'esp32' ? `2px solid ${accent}` : '2px solid transparent',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  ESP32 (C++)
+                </button>
+                <button
+                  onClick={() => setActiveCodeTab('arduino')}
+                  style={{
+                    flex: 1, padding: '12px 0', border: 'none', background: activeCodeTab === 'arduino' ? 'var(--bg-elevated)' : 'transparent',
+                    color: activeCodeTab === 'arduino' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    fontWeight: activeCodeTab === 'arduino' ? 700 : 500, fontSize: '0.85rem', cursor: 'pointer',
+                    borderBottom: activeCodeTab === 'arduino' ? `2px solid ${accent}` : '2px solid transparent',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  Arduino (C++)
+                </button>
+              </div>
+
+              {/* Code Editor Mockup */}
+              <div style={{ padding: '20px', background: '#1e1e1e', overflowX: 'auto' }}>
+                <pre style={{ margin: 0, fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#d4d4d4', lineHeight: 1.6 }}>
+                  {activeCodeTab === 'esp32' ? (
+`#include <WiFi.h>
+// Setup for ${product.name} on ESP32
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Initializing ${product.name}...");
+  // Connect pins according to ESP32 pinout
+  // SDA -> GPIO 21, SCL -> GPIO 22
+}
+
+void loop() {
+  // Read sensor data or control logic
+  delay(1000);
+}`
+                  ) : (
+`#include <Wire.h>
+// Setup for ${product.name} on Arduino Uno/Mega
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Initializing ${product.name}...");
+  // Connect pins to I2C (A4, A5 on Uno)
+  Wire.begin();
+}
+
+void loop() {
+  // Simple loop execution
+  delay(1000);
+}`
+                  )}
+                </pre>
+              </div>
+            </div>
+          </div>
+
           <div style={{ height: 100 }} />
         </div>
 
