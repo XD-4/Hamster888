@@ -433,6 +433,14 @@ body::before {
   transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
 }
 .shop-card:hover .shop-card-visual { transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.08) translateZ(20px); }
+.product-photo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 24px 48px -18px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,0,0,0.04);
+  transition: box-shadow 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.shop-card:hover .product-photo { box-shadow: 0 32px 64px -20px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.04); }
 .shop-card-copy {
   position: relative;
   z-index: 1;

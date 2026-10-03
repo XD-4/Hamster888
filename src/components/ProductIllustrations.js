@@ -1,6 +1,8 @@
 // Product Illustrations - SVG-based cinematic product visuals
 // Each product gets a unique, detailed SVG illustration
 
+import { getProductImage } from '@/data/productImages';
+
 export const PRODUCT_ILLUSTRATIONS = {
 
   /* ── ESP32-S3 Pro ── */
@@ -526,6 +528,23 @@ export function ProceduralProductIllustration({ productId, size = 200 }) {
 
 // Fallback illustration
 export function ProductIllustration({ productId, category, size = 200 }) {
+  // Prefer the photorealistic studio render when one exists
+  const imageSrc = getProductImage(productId);
+  if (imageSrc) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={imageSrc}
+        alt=""
+        loading="lazy"
+        width={size}
+        height={size}
+        className="product-photo"
+        style={{ width: size, height: size, objectFit: 'cover', borderRadius: Math.round(size * 0.12) }}
+      />
+    );
+  }
+
   // Use specific illustration if we hand-coded one
   const IllustrationComponent = PRODUCT_ILLUSTRATIONS[productId];
   if (IllustrationComponent) {

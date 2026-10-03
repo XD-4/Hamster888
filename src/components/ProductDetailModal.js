@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { getProductImage } from '@/data/productImages';
 
 // Map category to SVG icon
 const CATEGORY_ICONS = {
@@ -187,19 +188,42 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
             pointerEvents: 'none',
           }} />
 
-          {/* Product SVG Icon — floating */}
-          <div style={{
-            position: 'absolute',
-            top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 'min(260px, 55%)',
-            height: 'min(260px, 55%)',
-            animation: 'pdpFloat 6s ease-in-out infinite',
-            filter: `drop-shadow(0 0 40px ${accent}44)`,
-            pointerEvents: 'none',
-          }}>
-            {getProductVisual(product)}
-          </div>
+          {/* Product visual — realistic render if available, else SVG icon */}
+          {getProductImage(product.id) ? (
+            <div style={{
+              position: 'absolute',
+              top: '46%', left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 'min(340px, 62%)',
+              aspectRatio: '1 / 1',
+              animation: 'pdpFloat 6s ease-in-out infinite',
+              pointerEvents: 'none',
+            }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={getProductImage(product.id)}
+                alt={product.name}
+                style={{
+                  width: '100%', height: '100%', objectFit: 'cover',
+                  borderRadius: 28,
+                  boxShadow: `0 30px 80px -20px ${accent}66, 0 12px 30px rgba(0,0,0,0.25)`,
+                }}
+              />
+            </div>
+          ) : (
+            <div style={{
+              position: 'absolute',
+              top: '50%', left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 'min(260px, 55%)',
+              height: 'min(260px, 55%)',
+              animation: 'pdpFloat 6s ease-in-out infinite',
+              filter: `drop-shadow(0 0 40px ${accent}44)`,
+              pointerEvents: 'none',
+            }}>
+              {getProductVisual(product)}
+            </div>
+          )}
 
           {/* Badge top-left */}
           {product.badge && (
