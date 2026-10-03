@@ -16,6 +16,19 @@ export const PRODUCT_IMAGE_IDS = new Set([
   'pca9685-16ch',
 ]);
 
+const availableImages = Array.from(PRODUCT_IMAGE_IDS);
+
 export function getProductImage(productId) {
-  return PRODUCT_IMAGE_IDS.has(productId) ? `/products/${productId}.jpg` : null;
+  if (PRODUCT_IMAGE_IDS.has(productId)) {
+    return `/products/${productId}.jpg`;
+  }
+  
+  // Temporary: Map missing products to existing photorealistic images
+  // using a simple stable hash so the same product always gets the same image.
+  let hash = 0;
+  for (let i = 0; i < productId.length; i++) {
+    hash = productId.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const index = Math.abs(hash) % availableImages.length;
+  return `/products/${availableImages[index]}.jpg`;
 }
