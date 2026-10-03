@@ -1,9 +1,26 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
+import { createClient } from '@/lib/supabase/client';
+import AuthModal from './AuthModal';
 export default function AppleNavbar({ activeSection, setActiveSection, cartCount, onOpenCart, onOpenPaymentModal }) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+    };
+    checkSession();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+  };
 
   useEffect(() => {
     // Check local storage or system preference on mount
@@ -39,6 +56,7 @@ export default function AppleNavbar({ activeSection, setActiveSection, cartCount
   ];
 
   return (
+    <>
     <header className="apple-nav">
       <div className="apple-nav__inner">
         {/* Brand / Logo */}
@@ -88,6 +106,30 @@ export default function AppleNavbar({ activeSection, setActiveSection, cartCount
         </nav>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          {/* User Profile / Login */}
+          {user ? (
+            <button
+              type="button"
+              className="apple-nav__icon"
+              onClick={handleLogout}
+              aria-label="ออกจากระบบ"
+              title={`เข้าสู่ระบบด้วย ${user.email}`}
+              style={{ fontSize: '0.8rem', fontWeight: 600, width: 'auto', padding: '0 10px', borderRadius: '16px' }}
+            >
+              ออก
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="apple-nav__icon"
+              onClick={() => setIsAuthModalOpen(true)}
+              aria-label="เข้าสู่ระบบ / สมัครสมาชิก"
+              style={{ fontSize: '0.8rem', fontWeight: 600, width: 'auto', padding: '0 10px', borderRadius: '16px' }}
+            >
+              ล็อกอิน
+            </button>
+          )}
+
           {/* Theme Toggle */}
           <button
             type="button"
@@ -131,5 +173,12 @@ export default function AppleNavbar({ activeSection, setActiveSection, cartCount
         </div>
       </div>
     </header>
+    
+    <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        onLoginSuccess={(userData) => setUser(userData)}
+    />
+    </>
   );
 }
