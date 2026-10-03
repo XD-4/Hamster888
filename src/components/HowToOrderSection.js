@@ -189,7 +189,7 @@ export default function HowToOrderSection({ onOpenPaymentModal, onGoToShop }) {
             </p>
 
             <div style={{
-              background: 'rgba(0,0,0,0.04)',
+              background: 'var(--bg-elevated)',
               borderLeft: '4px solid var(--apple-blue)',
               padding: '16px 20px',
               borderRadius: '0 14px 14px 0',

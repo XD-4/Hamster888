@@ -63,12 +63,12 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
       ref={containerRef}
       style={{
         position: 'relative',
-        minHeight: '110dvh', // Allows room for scrolling
+        minHeight: 'auto',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingTop: 'calc(44px + 9vh)',
-        paddingBottom: '80px',
+        paddingTop: 'calc(44px + 4rem)',
+        paddingBottom: '60px',
         backgroundColor: 'transparent',
         overflow: 'hidden',
       }}
@@ -83,18 +83,18 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
       }} />
 
       {/* ── Hero Content (Typography) ── */}
-      <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 24px', maxWidth: 980, width: '100%', marginBottom: '10vh' }}>
+      <div style={{ position: 'relative', zIndex: 10, textAlign: 'center', padding: '0 24px', maxWidth: 940, width: '100%', marginBottom: '3.8rem' }}>
         
         {/* Main Headline (Apple.com proportions) */}
         <h1 
           ref={headlineRef}
           style={{
-            fontSize: 'clamp(2.5rem, 5.2vw, 3.5rem)',
+            fontSize: 'clamp(2.5rem, 5.5vw, 4.1rem)',
             fontWeight: 600, 
-            lineHeight: 1.07,
-            letterSpacing: '-0.005em',
+            lineHeight: 1.08,
+            letterSpacing: '-0.015em',
             fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif',
-            marginBottom: '0.4rem',
+            marginBottom: '0.8rem',
             color: 'var(--text-primary)',
             opacity: 0,
           }}
@@ -117,12 +117,12 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
         <p 
           ref={subHeadlineRef}
           style={{
-            fontSize: 'clamp(1.05rem, 2vw, 1.4rem)',
+            fontSize: 'clamp(1.08rem, 1.8vw, 1.35rem)',
             color: 'var(--text-tertiary)',
-            maxWidth: 640, 
-            margin: '0 auto 1.4rem',
+            maxWidth: 660, 
+            margin: '0 auto 1.8rem',
             fontWeight: 400, 
-            lineHeight: 1.4,
+            lineHeight: 1.5,
             letterSpacing: '0.004em',
             opacity: 0
           }}
@@ -144,9 +144,9 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
             id="hero-shop-btn"
             onClick={onExploreProducts}
             style={{
-              padding: '9px 20px',
-              fontSize: '15px',
-              fontWeight: 400,
+              padding: '10px 22px',
+              fontSize: '16px',
+              fontWeight: 500,
               borderRadius: '980px',
               background: '#0071e3',
               color: '#fff',
@@ -164,9 +164,9 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
             id="hero-howto-btn"
             onClick={onExploreHowToOrder}
             style={{
-              padding: '9px 20px',
-              fontSize: '15px',
-              fontWeight: 400,
+              padding: '10px 22px',
+              fontSize: '16px',
+              fontWeight: 500,
               borderRadius: '980px',
               background: 'transparent',
               color: '#0066cc',
@@ -189,8 +189,8 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '12px',
-            maxWidth: 980,
+            gap: '14px',
+            maxWidth: 1020,
             width: '100%',
             padding: '0 22px',
             boxSizing: 'border-box',
@@ -236,9 +236,8 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
               key={i}
               ref={el => (bentoCardsRef.current[i] = el)}
               style={{
-                background: 'rgba(245,245,247,0.85)',
-                border: '1px solid rgba(0,0,0,0.04)',
-                borderTop: `1px solid rgba(0,0,0,0.04)`,
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border)',
                 borderRadius: '18px',
                 padding: '28px 24px',
                 textAlign: 'left',
@@ -255,16 +254,16 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
               }}
               onMouseLeave={e => {
                 e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.borderColor = 'rgba(0,0,0,0.04)';
+                e.currentTarget.style.borderColor = 'var(--border)';
               }}
             >
               <div style={{ marginBottom: 16, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 44, height: 44, borderRadius: '12px', background: `${card.accent}15` }}>
                 {card.icon}
               </div>
-              <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-0.01em', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
+              <div style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: 8, letterSpacing: '-0.01em', fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
                 {card.title}
               </div>
-              <p style={{ fontSize: '0.88rem', color: 'var(--text-tertiary)', lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: '0.96rem', color: 'var(--text-tertiary)', lineHeight: 1.55, margin: 0 }}>
                 {card.desc}
               </p>
             </div>

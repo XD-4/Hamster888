@@ -171,9 +171,9 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
         {/* ── HERO SECTION ── */}
         <div style={{ position: 'relative', width: '100%', minHeight: '400px', overflow: 'hidden', marginTop: '-34px', flexShrink: 0 }}>
           {/* BG Gradient */}
-          <div style={{
+          <div className="pdp-hero-bg" style={{
             position: 'absolute', inset: 0,
-            background: `radial-gradient(ellipse 80% 70% at 50% 30%, ${glow} 0%, transparent 65%), #f5f5f7`,
+            background: `radial-gradient(ellipse 80% 70% at 50% 30%, ${glow} 0%, transparent 65%), var(--bg-elevated)`,
           }} />
 
           {/* Glow orb */}
@@ -312,16 +312,13 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-tertiary)', marginBottom: 12 }}>
               Technical Specifications
             </div>
-            <div style={{ display: 'grid', gap: 1, background: 'rgba(0,0,0,0.05)', borderRadius: 14, overflow: 'hidden' }}>
+            <div style={{ display: 'grid', gap: 1, background: 'var(--border)', borderRadius: 14, overflow: 'hidden' }}>
               {product.specs.map((spec, i) => (
-                <div key={i} style={{
+                <div key={i} className="pdp-spec-row" style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                  padding: '14px 18px', background: '#f5f5f7',
+                  padding: '14px 18px', background: 'var(--bg-elevated)',
                   transition: 'background 0.2s ease',
-                }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#ededf0'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#f5f5f7'}
-                >
+                }}>
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 500 }}>{spec.label}</span>
                   <span style={{ fontSize: '0.85rem', color: 'var(--text-primary)', fontWeight: 600, textAlign: 'right', maxWidth: '55%' }}>{spec.val}</span>
                 </div>
@@ -331,13 +328,13 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
 
           {/* Feature Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 32 }}>
-            <div style={{ background: '#f5f5f7', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 14, padding: '18px 18px' }}>
+            <div className="feature-tile" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 14, padding: '18px 18px' }}>
               <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-tertiary)', marginBottom: 6 }}>คลังสินค้า</div>
               <div style={{ fontSize: '1.5rem', fontWeight: 800, color: product.stock > 20 ? '#30d158' : '#ff9f0a', letterSpacing: '-0.02em' }}>{product.stock}</div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', marginTop: 2 }}>ชิ้นพร้อมส่ง</div>
             </div>
             {product.rating && (
-              <div style={{ background: '#f5f5f7', border: '1px solid rgba(0,0,0,0.06)', borderRadius: 14, padding: '18px 18px' }}>
+              <div className="feature-tile" style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border)', borderRadius: 14, padding: '18px 18px' }}>
                 <div style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-tertiary)', marginBottom: 6 }}>คะแนน</div>
                 <div style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ff9f0a', letterSpacing: '-0.02em' }}>{product.rating} ★</div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-tertiary)', marginTop: 2 }}>{product.reviewsCount} รีวิว</div>
