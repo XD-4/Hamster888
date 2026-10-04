@@ -662,8 +662,8 @@ export default function CinematicIntro({ onComplete }) {
               textAnchor="middle"
               dominantBaseline="middle"
               style={{
-                fontSize: 'clamp(8rem, 22vw, 22rem)',
-                fontFamily: '"Snell Roundhand", "Brush Script MT", "Pacifico", cursive',
+                fontSize: 'clamp(5rem, 15vw, 15rem)',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
                 fontWeight: 600,
                 letterSpacing: '-0.02em',
                 stroke: 'url(#iotGradient)',
