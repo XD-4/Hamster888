@@ -14,6 +14,10 @@ export const PRODUCT_IMAGE_IDS = new Set([
   'infrared-10nk',
   'dcdc-stepup-1200w',
   'pca9685-16ch',
+  'lcd-1602-keypad',
+  'crystal-12mhz',
+  'dcdc-boost-150w',
+  'led-bar-red',
 ]);
 
 const availableImages = Array.from(PRODUCT_IMAGE_IDS);

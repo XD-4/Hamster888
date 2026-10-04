@@ -143,42 +143,21 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
           <button
             id="hero-shop-btn"
             onClick={onExploreProducts}
-            style={{
-              padding: '10px 22px',
-              fontSize: '16px',
-              fontWeight: 500,
-              borderRadius: '980px',
-              background: '#0071e3',
-              color: '#fff',
-              border: '1px solid #0071e3',
-              cursor: 'pointer',
-              transition: 'background 0.25s ease',
-              letterSpacing: '-0.01em'
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#0077ed'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#0071e3'; }}
+            className="liquid-metal-btn"
           >
-            เลือกซื้ออุปกรณ์
+            <span className="liquid-metal-inner">
+              เลือกซื้ออุปกรณ์
+            </span>
           </button>
+
           <button
             id="hero-howto-btn"
             onClick={onExploreHowToOrder}
-            style={{
-              padding: '10px 22px',
-              fontSize: '16px',
-              fontWeight: 500,
-              borderRadius: '980px',
-              background: 'transparent',
-              color: '#0066cc',
-              border: '1px solid #0066cc',
-              cursor: 'pointer',
-              transition: 'all 0.25s ease',
-              letterSpacing: '-0.01em'
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#0066cc'; e.currentTarget.style.color = '#fff'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#0066cc'; }}
+            className="liquid-metal-btn"
           >
-            วิธีสั่งซื้อ
+            <span className="liquid-metal-inner">
+              วิธีสั่งซื้อ
+            </span>
           </button>
         </div>
       </div>

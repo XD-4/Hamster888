@@ -104,9 +104,11 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                 className={`shop-cat ${active ? 'is-active' : ''}`}
                 onClick={() => setSelectedCategory(cat.id)}
               >
-                <span className="shop-cat-icon" aria-hidden="true">
-                  <Icon size={22} strokeWidth={1.75} />
-                </span>
+                <div className="liquid-metal-btn" style={{ borderRadius: '50%', padding: '1.5px' }}>
+                  <span className="liquid-metal-inner shop-cat-icon" aria-hidden="true" style={{ padding: 0, borderRadius: '50%', width: 68, height: 68, background: active ? 'linear-gradient(180deg, #2c2c2e 0%, #0a0a0a 100%)' : 'linear-gradient(180deg, #1c1c1e 0%, #080808 100%)', color: active ? '#fff' : '#a1a1a6' }}>
+                    <Icon size={28} strokeWidth={1.5} />
+                  </span>
+                </div>
                 <span className="shop-cat-label">{CAT_SHORT[cat.id] || cat.name}</span>
                 <span className="shop-cat-count">{categoryCounts[cat.id] || 0}</span>
               </button>
@@ -139,13 +141,13 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
           <p className="shop-empty-copy">ลองคำค้นอื่น หรือดูสินค้าทั้งหมด</p>
           <button
             type="button"
-            className="shop-buy"
+            className="liquid-metal-btn"
             onClick={() => {
               setSearchQuery('');
               setSelectedCategory('all');
             }}
           >
-            ดูสินค้าทั้งหมด
+            <span className="liquid-metal-inner">ดูสินค้าทั้งหมด</span>
           </button>
         </div>
       ) : (
@@ -184,17 +186,19 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                   </button>
                   <button
                     type="button"
-                    className={`shop-buy ${addedId === featured.id ? 'is-added' : ''}`}
+                    className={`liquid-metal-btn ${addedId === featured.id ? 'is-added' : ''}`}
                     onClick={(e) => handleAdd(featured, e)}
                   >
-                    {addedId === featured.id ? (
-                      <>
-                        <Check size={16} strokeWidth={2.5} aria-hidden="true" />
-                        เพิ่มแล้ว
-                      </>
-                    ) : (
-                      'ซื้อ'
-                    )}
+                    <span className="liquid-metal-inner" style={{ padding: '6px 14px', fontSize: '0.9rem' }}>
+                      {addedId === featured.id ? (
+                        <>
+                          <Check size={16} strokeWidth={2.5} aria-hidden="true" />
+                          เพิ่มแล้ว
+                        </>
+                      ) : (
+                        'ซื้อ'
+                      )}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -240,17 +244,19 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                     </button>
                     <button
                       type="button"
-                      className={`shop-buy ${isAdded ? 'is-added' : ''}`}
+                      className={`liquid-metal-btn ${isAdded ? 'is-added' : ''}`}
                       onClick={(e) => handleAdd(product, e)}
                     >
-                      {isAdded ? (
-                        <>
-                          <Check size={16} strokeWidth={2.5} aria-hidden="true" />
-                          เพิ่มแล้ว
-                        </>
-                      ) : (
-                        'ซื้อ'
-                      )}
+                      <span className="liquid-metal-inner" style={{ padding: '6px 14px', fontSize: '0.9rem' }}>
+                        {isAdded ? (
+                          <>
+                            <Check size={16} strokeWidth={2.5} aria-hidden="true" />
+                            เพิ่มแล้ว
+                          </>
+                        ) : (
+                          'ซื้อ'
+                        )}
+                      </span>
                     </button>
                   </div>
                 </div>

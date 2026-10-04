@@ -2,6 +2,35 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { getProductImage } from '@/data/productImages';
+const CATEGORY_USE_CASES = {
+  mcu: [
+    { title: 'ศูนย์กลางประมวลผล (Edge AI)', desc: 'เป็นสมองกลหลักสำหรับรันโมเดล AI ขนาดเล็ก หรือควบคุมฮาร์ดแวร์แบบ Real-time', img: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?auto=format&fit=crop&q=80&w=600', icon: '🧠' },
+    { title: 'ระบบอัตโนมัติ (Automation)', desc: 'ประมวลผลคำสั่งและรับค่าจากเซนเซอร์เพื่อควบคุมการทำงานของเครื่องจักร', img: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600', icon: '⚙️' },
+    { title: 'สมาร์ทโฮมฮับ (Smart Home Hub)', desc: 'รันเซิร์ฟเวอร์แบบ Local เช่น Home Assistant สำหรับจัดการบ้านอัจฉริยะ', img: 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=600', icon: '🏠' }
+  ],
+  sensor: [
+    { title: 'ตรวจจับสภาพแวดล้อม', desc: 'ใช้วัดค่าฝุ่นละออง อุณหภูมิ และก๊าซต่างๆ สำหรับงาน Smart City', img: 'https://images.unsplash.com/photo-1534970028765-38ce47ef7d8d?auto=format&fit=crop&q=80&w=600', icon: '🌡️' },
+    { title: 'โดรนและยานยนต์ไร้คนขับ', desc: 'ใช้ LiDAR หรือเซนเซอร์ต่างๆ ในการวิเคราะห์ระยะทางและหลบหลีก', img: 'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=600', icon: '🚁' },
+    { title: 'การเกษตรแม่นยำสูง', desc: 'เช็คความชื้นในดินและสภาพอากาศ เพื่อสั่งระบบรดน้ำอัตโนมัติ', img: 'https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?auto=format&fit=crop&q=80&w=600', icon: '🌱' }
+  ],
+  wireless: [
+    { title: 'ระบบส่งข้อมูลระยะไกล (LoRa)', desc: 'ส่งข้อมูลเซนเซอร์ข้ามอำเภอโดยไม่ต้องใช้อินเทอร์เน็ตมือถือ', img: 'https://images.unsplash.com/photo-1521405924368-64c5b84bec60?auto=format&fit=crop&q=80&w=600', icon: '📡' },
+    { title: 'ติดตามยานพาหนะ (Fleet)', desc: 'ทำงานร่วมกับ GPS เพื่อระบุตำแหน่งรถขนส่งสินค้าและส่งข้อมูลขึ้น Cloud', img: 'https://images.unsplash.com/photo-1717386255773-1e3037c81788?auto=format&fit=crop&q=80&w=600', icon: '🚚' },
+    { title: 'เครือข่ายเซนเซอร์ไร้สาย', desc: 'เชื่อมต่อโหนดเซนเซอร์หลายสิบตัวในไร่หรือโรงงานเข้าสู่เกตเวย์', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600', icon: '🕸️' }
+  ],
+  power: [
+    { title: 'แหล่งพลังงานหุ่นยนต์', desc: 'จ่ายไฟแรงดันสูงและคงที่สำหรับขับเคลื่อนมอเตอร์กำลังสูง', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600', icon: '🔋' },
+    { title: 'ระบบโซล่าเซลล์ (Off-grid)', desc: 'จัดการและชาร์จแบตเตอรี่จากแผงโซล่าเซลล์สำหรับระบบ IoT กลางป่า', img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&q=80&w=600', icon: '☀️' },
+    { title: 'สถานีชาร์จอัตโนมัติ', desc: 'ระบบจ่ายไฟหรือแปลงไฟพกพาสำหรับชาร์จอุปกรณ์ระยะไกล', img: 'https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=600', icon: '🔌' }
+  ],
+  robotics: [
+    { title: 'แขนกลอุตสาหกรรม', desc: 'ออกแบบแขนกลหยิบจับสินค้าด้วยมอเตอร์สเตปเปอร์และเซอร์โวที่แม่นยำ', img: 'https://images.unsplash.com/photo-1519558260268-cde7e03a0152?auto=format&fit=crop&q=80&w=600', icon: '🦾' },
+    { title: 'หุ่นยนต์สำรวจพื้นที่', desc: 'หุ่นยนต์ขับเคลื่อนอัตโนมัติสำหรับการสำรวจพื้นที่', img: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&q=80&w=600', icon: '🚀' },
+    { title: 'สมาร์ทโลจิสติกส์ (AGV)', desc: 'สร้างรถขนของอัตโนมัติในคลังสินค้าที่เดินตามเส้นหรือแผนที่นำทาง', img: 'https://images.unsplash.com/photo-1737644467636-6b0053476bb2?auto=format&fit=crop&q=80&w=600', icon: '📦' }
+  ]
+};
+
+const DEFAULT_USE_CASES = CATEGORY_USE_CASES.mcu;
 
 // Map category to SVG icon
 const CATEGORY_ICONS = {
@@ -152,20 +181,21 @@ export default function ProductDetailModal({ product, onClose, onAddToCart }) {
           aria-label="ปิด"
           style={{
             position: 'sticky', top: 16, left: '100%', zIndex: 20,
-            display: 'block', marginLeft: 'auto', marginRight: 16,
-            width: 34, height: 34,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            marginLeft: 'auto', marginRight: 16,
+            width: 42, height: 42,
             background: 'rgba(0,0,0,0.12)',
             backdropFilter: 'blur(12px)',
             border: 'none', borderRadius: '50%',
-            color: 'var(--text-primary)', fontSize: '1rem',
+            color: 'var(--text-primary)',
             cursor: 'pointer',
-            transition: 'background 0.2s ease',
+            transition: 'background 0.2s ease, transform 0.2s ease',
             flexShrink: 0,
           }}
-          onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,0,0,0.22)'}
-          onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,0.12)'}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.22)'; e.currentTarget.style.transform = 'scale(1.05)' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'rgba(0,0,0,0.12)'; e.currentTarget.style.transform = 'scale(1)' }}
         >
-          ✕
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
 
         {/* ── HERO SECTION ── */}
@@ -418,6 +448,30 @@ void loop() {
               </div>
             </div>
           </div>
+          {/* ── USE CASES & APPLICATIONS ── */}
+          <div style={{ marginTop: 60, paddingBottom: 20 }}>
+            <div style={{
+              fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-tertiary)', textTransform: 'uppercase', marginBottom: 24, borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: 16
+            }}>
+              Use Cases & Applications
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+              {(CATEGORY_USE_CASES[product.category] || DEFAULT_USE_CASES).map((useCase, idx) => (
+                <div key={idx} style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '24px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ height: '140px', width: '100%', position: 'relative' }}>
+                    <img src={useCase.img} alt={useCase.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'absolute', top: 12, right: 12, fontSize: '1.5rem', background: 'rgba(0,0,0,0.5)', padding: '2px 10px', borderRadius: '16px', backdropFilter: 'blur(10px)' }}>{useCase.icon}</div>
+                  </div>
+                  <div style={{ padding: '24px', flex: 1 }}>
+                    <h4 style={{ margin: '0 0 8px 0', fontSize: '1.05rem', color: 'var(--text-primary)', fontWeight: 700 }}>{useCase.title}</h4>
+                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                      {useCase.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div style={{ height: 100 }} />
         </div>
@@ -466,34 +520,22 @@ void loop() {
             {/* Add to cart CTA */}
             <button
               onClick={handleAdd}
-              style={{
-                display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                background: added ? '#30d158' : accent,
-                color: '#fff',
-                border: 'none', borderRadius: 'var(--r-pill)',
-                padding: '13px 28px',
-                fontSize: '1rem', fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                boxShadow: added ? '0 4px 20px rgba(48,209,88,0.4)' : `0 4px 20px ${accent}44`,
-                minWidth: 180,
-                letterSpacing: '-0.01em',
-                fontFamily: 'var(--font-body)',
-              }}
-              onMouseEnter={e => { if (!added) e.currentTarget.style.transform = 'scale(1.03)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+              className="liquid-metal-btn"
+              style={{ minWidth: 180 }}
             >
-              {added ? (
-                <>✓ เพิ่มใส่ตะกร้าแล้ว!</>
-              ) : (
-                <>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                  </svg>
-                  หยิบใส่ตะกร้า ({qty})
-                </>
-              )}
+              <span className="liquid-metal-inner" style={added ? { color: '#30d158' } : {}}>
+                {added ? (
+                  <>✓ เพิ่มใส่ตะกร้าแล้ว!</>
+                ) : (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                    หยิบใส่ตะกร้า ({qty})
+                  </>
+                )}
+              </span>
             </button>
           </div>
         </div>

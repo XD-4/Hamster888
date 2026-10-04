@@ -591,35 +591,13 @@ export default function CinematicIntro({ onComplete }) {
               type="button"
               id="intro-start-btn"
               onClick={handleStart}
-              style={{
-                position: 'relative',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                padding: '16px 38px',
-                fontSize: '1.05rem',
-                fontWeight: 600,
-                color: '#fff',
-                background: 'linear-gradient(135deg, #0071e3 0%, #004499 100%)',
-                border: '1px solid rgba(255, 255, 255, 0.25)',
-                borderRadius: '980px',
-                cursor: 'pointer',
-                boxShadow: '0 12px 35px rgba(0, 113, 227, 0.5), inset 0 1px 0 rgba(255,255,255,0.4)',
-                transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease',
-                letterSpacing: '-0.01em',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'scale(1.04)';
-                e.currentTarget.style.boxShadow = '0 18px 45px rgba(0, 113, 227, 0.7), inset 0 1px 0 rgba(255,255,255,0.5)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 12px 35px rgba(0, 113, 227, 0.5), inset 0 1px 0 rgba(255,255,255,0.4)';
-              }}
+              className="liquid-metal-btn"
             >
-              <Play size={18} fill="#fff" />
-              <span>Start</span>
-              <Volume2 size={16} style={{ opacity: 0.75, marginLeft: '4px' }} />
+              <span className="liquid-metal-inner">
+                <Play size={18} fill="#fff" />
+                <span>Start</span>
+                <Volume2 size={16} style={{ opacity: 0.75, marginLeft: '4px' }} />
+              </span>
             </button>
           </div>
         )}
