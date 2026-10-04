@@ -1225,3 +1225,25 @@ body::before {
   box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
 }
 
+
+:root:not(.dark) .liquid-metal-btn::before {
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(0,0,0,0.05) 0deg,
+    rgba(0, 113, 227, 0.9) 20deg,
+    rgba(0,0,0,0.05) 40deg,
+    rgba(0,0,0,0.05) 180deg,
+    rgba(0, 113, 227, 0.9) 200deg,
+    rgba(0,0,0,0.05) 220deg,
+    rgba(0,0,0,0.05) 360deg
+  );
+}
+
+
+.shop-cat.is-active .liquid-metal-btn {
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--text-primary);
+}
+:root:not(.dark) .shop-cat.is-active .liquid-metal-btn {
+  box-shadow: 0 0 0 3px #f5f5f7, 0 0 0 5px #0071e3;
+}
+
