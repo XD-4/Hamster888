@@ -7,6 +7,18 @@ export default function WaveBackground() {
   const playerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showHint, setShowHint] = useState(true);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
+
+  // Fade out on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      // Fade out from scrollY 0 to 400
+      const newOpacity = Math.max(0, 1 - window.scrollY / 400);
+      setScrollOpacity(newOpacity);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Initialize YouTube Player
   useEffect(() => {
@@ -317,7 +329,9 @@ void main(){ mainImage(gl_FragColor, gl_FragCoord.xy); }`;
           height: '100%',
           zIndex: -1,
           pointerEvents: 'none',
-          backgroundColor: 'transparent'
+          backgroundColor: 'transparent',
+          opacity: scrollOpacity,
+          transition: 'opacity 0.1s ease-out',
         }}
       />
       

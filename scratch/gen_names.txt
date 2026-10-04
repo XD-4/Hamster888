@@ -1,0 +1,149 @@
+    id: 'gen-product-0',
+    name: 'Arduino UNO R3 SMD',
+--
+    id: 'gen-product-1',
+    name: 'Arduino Mega 2560 R3',
+--
+    id: 'gen-product-2',
+    name: 'NodeMCU V3 ESP8266',
+--
+    id: 'gen-product-3',
+    name: 'Raspberry Pi Pico',
+--
+    id: 'gen-product-4',
+    name: 'ESP32 Dev Module',
+--
+    id: 'gen-product-5',
+    name: 'DHT11 Temp & Humidity Sensor',
+--
+    id: 'gen-product-6',
+    name: 'DHT22 High Precision Temp/Hum',
+--
+    id: 'gen-product-7',
+    name: 'HC-SR04 Ultrasonic Sensor',
+--
+    id: 'gen-product-8',
+    name: 'PIR Motion Sensor HC-SR501',
+--
+    id: 'gen-product-9',
+    name: 'LDR Photoresistor Module',
+--
+    id: 'gen-product-10',
+    name: 'Raindrop Sensor Module',
+--
+    id: 'gen-product-11',
+    name: 'Soil Moisture Sensor',
+--
+    id: 'gen-product-12',
+    name: 'MQ-2 Gas Sensor',
+--
+    id: 'gen-product-13',
+    name: 'MQ-7 Carbon Monoxide Sensor',
+--
+    id: 'gen-product-14',
+    name: 'Water Level Sensor',
+--
+    id: 'gen-product-15',
+    name: 'Flame Sensor Module',
+--
+    id: 'gen-product-16',
+    name: 'Sound Sensor Module',
+--
+    id: 'gen-product-17',
+    name: 'TCS3200 Color Sensor',
+--
+    id: 'gen-product-18',
+    name: 'GY-521 MPU6050 6-DOF',
+--
+    id: 'gen-product-19',
+    name: 'BMP280 Barometric Pressure',
+--
+    id: 'gen-product-20',
+    name: 'Relay Module 1 Channel 5V',
+--
+    id: 'gen-product-21',
+    name: 'Relay Module 2 Channel 5V',
+--
+    id: 'gen-product-22',
+    name: 'Relay Module 4 Channel 5V',
+--
+    id: 'gen-product-23',
+    name: 'Relay Module 8 Channel 5V',
+--
+    id: 'gen-product-24',
+    name: 'L298N Motor Driver Module',
+--
+    id: 'gen-product-25',
+    name: 'SG90 Micro Servo Motor',
+--
+    id: 'gen-product-26',
+    name: 'MG996R High Torque Servo',
+--
+    id: 'gen-product-27',
+    name: 'NEMA 17 Stepper Motor',
+--
+    id: 'gen-product-28',
+    name: 'A4988 Stepper Driver',
+--
+    id: 'gen-product-29',
+    name: 'TB6600 Stepper Driver',
+--
+    id: 'gen-product-30',
+    name: 'DC Motor with Gearbox (TT Motor)',
+--
+    id: 'gen-product-31',
+    name: 'NRF24L01 Wireless Module',
+--
+    id: 'gen-product-32',
+    name: 'NRF24L01+PA+LNA with Antenna',
+--
+    id: 'gen-product-33',
+    name: 'HC-05 Bluetooth Module',
+--
+    id: 'gen-product-34',
+    name: 'HC-06 Bluetooth Module',
+--
+    id: 'gen-product-35',
+    name: 'SIM800L GSM/GPRS Module',
+--
+    id: 'gen-product-36',
+    name: 'NEO-6M GPS Module',
+--
+    id: 'gen-product-37',
+    name: 'RFID RC522 Module',
+--
+    id: 'gen-product-38',
+    name: '433MHz RF Transmitter/Receiver',
+--
+    id: 'gen-product-39',
+    name: 'TP4056 Lithium Battery Charger',
+--
+    id: 'gen-product-40',
+    name: '18650 Battery Holder 1 Slot',
+--
+    id: 'gen-product-41',
+    name: '18650 Battery Holder 2 Slot',
+--
+    id: 'gen-product-42',
+    name: 'MT3608 DC-DC Step Up',
+--
+    id: 'gen-product-43',
+    name: 'LM2596 DC-DC Step Down',
+--
+    id: 'gen-product-44',
+    name: 'XL6009 DC-DC Step Up',
+--
+    id: 'gen-product-45',
+    name: 'Breadboard 400 points',
+--
+    id: 'gen-product-46',
+    name: 'Breadboard 830 points',
+--
+    id: 'gen-product-47',
+    name: 'Jumper Wires Male-Male 40pcs',
+--
+    id: 'gen-product-48',
+    name: 'Jumper Wires Female-Female 40pcs',
+--
+    id: 'gen-product-49',
+    name: 'Jumper Wires Male-Female 40pcs',

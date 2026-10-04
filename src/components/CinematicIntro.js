@@ -288,12 +288,25 @@ export default function CinematicIntro({ onComplete }) {
       19.5
     );
 
-    // IOT Text Appears with extreme Apple-style prominence (Titanium Metallic)
+    // IOT Text Appears with extreme Apple-style prominence
     master.fromTo(
       iotTextRef.current,
-      { scale: 0.5, filter: 'blur(40px)', opacity: 0 },
-      { scale: 1.15, filter: 'blur(0px)', opacity: 1, duration: 3.5, ease: 'power2.out' },
+      { scale: 0.8, opacity: 0 },
+      { scale: 1.15, opacity: 1, duration: 3.5, ease: 'power2.out' },
       19.5
+    );
+
+    master.fromTo(
+      '.iot-svg-text',
+      { strokeDasharray: 2000, strokeDashoffset: 2000, fill: 'rgba(255,255,255,0)' },
+      { strokeDashoffset: 0, duration: 2.5, ease: 'power2.inOut' },
+      19.5
+    );
+
+    master.to(
+      '.iot-svg-text',
+      { fill: 'url(#iotGradient)', duration: 1.5, ease: 'power2.out' },
+      21.0
     );
 
     // Chapter 6: 22.5s - 25s (Hyper-Drive Portal Zoom Out)
@@ -620,21 +633,49 @@ export default function CinematicIntro({ onComplete }) {
         <div
           ref={iotTextRef}
           style={{
-            fontSize: 'clamp(12rem, 32vw, 32rem)',
-            fontWeight: 900,
-            fontFamily: 'var(--font-display)',
-            letterSpacing: '-0.07em',
-            background: 'linear-gradient(110deg, #ffffff 0%, #e5e5ea 15%, #8e8e93 35%, #1c1c1e 50%, #8e8e93 65%, #e5e5ea 85%, #ffffff 100%)',
-            backgroundSize: '200% auto',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            textShadow: '0 30px 80px rgba(255,255,255,0.15)',
             position: 'absolute',
             zIndex: 1,
-            whiteSpace: 'nowrap',
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            pointerEvents: 'none',
           }}
         >
-          IOT
+          <svg viewBox="0 0 1000 400" width="100%" height="100%" style={{ overflow: 'visible' }}>
+            <defs>
+              <linearGradient id="iotGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#ffffff" />
+                <stop offset="15%" stopColor="#e5e5ea" />
+                <stop offset="35%" stopColor="#8e8e93" />
+                <stop offset="50%" stopColor="#1c1c1e" />
+                <stop offset="65%" stopColor="#8e8e93" />
+                <stop offset="85%" stopColor="#e5e5ea" />
+                <stop offset="100%" stopColor="#ffffff" />
+              </linearGradient>
+            </defs>
+            <text
+              className="iot-svg-text"
+              x="50%"
+              y="50%"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              style={{
+                fontSize: 'clamp(8rem, 22vw, 22rem)',
+                fontFamily: '"Snell Roundhand", "Brush Script MT", "Pacifico", cursive',
+                fontWeight: 600,
+                letterSpacing: '-0.02em',
+                stroke: 'url(#iotGradient)',
+                strokeWidth: '3px',
+                strokeLinecap: 'round',
+                strokeLinejoin: 'round',
+                filter: 'drop-shadow(0 15px 40px rgba(255,255,255,0.2))'
+              }}
+            >
+              IoT
+            </text>
+          </svg>
         </div>
         
         {/* Explosion Flash */}

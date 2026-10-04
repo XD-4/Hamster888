@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) {
   const containerRef = useRef(null);
   const headlineRef = useRef(null);
-  const subHeadlineRef = useRef(null);
   const ctaRef = useRef(null);
   const bentoRef = useRef(null);
   const bentoCardsRef = useRef([]);
@@ -20,11 +19,6 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
     tl.fromTo(headlineRef.current, 
       { opacity: 0, y: 100, scale: 0.95, filter: 'blur(10px)' }, 
       { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power3.out' }
-    )
-    .fromTo(subHeadlineRef.current,
-      { opacity: 0, y: 30, filter: 'blur(5px)' },
-      { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1, ease: 'power2.out' },
-      "-=1.0"
     )
     .fromTo(ctaRef.current,
       { opacity: 0, y: 20 },
@@ -99,7 +93,7 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
             opacity: 0,
           }}
         >
-          <span style={{ display: 'block' }}>The Silicon</span>
+          <span style={{ display: 'block' }}>Internet</span>
           <span style={{
             display: 'block',
             background: 'linear-gradient(110deg, #1d1d1f 0%, #6e6e73 35%, #0071e3 60%, #1d1d1f 100%)',
@@ -113,23 +107,6 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
           </span>
         </h1>
 
-        {/* Sub headline */}
-        <p 
-          ref={subHeadlineRef}
-          style={{
-            fontSize: 'clamp(1.08rem, 1.8vw, 1.35rem)',
-            color: 'var(--text-tertiary)',
-            maxWidth: 660, 
-            margin: '0 auto 1.8rem',
-            fontWeight: 400, 
-            lineHeight: 1.5,
-            letterSpacing: '0.004em',
-            opacity: 0
-          }}
-        >
-          ศูนย์รวม ESP32, Raspberry Pi, LiDAR, และเซนเซอร์คุณภาพสูง<br/>
-          พร้อมออกใบกำกับภาษีเต็มรูปแบบ ขุมพลังระดับ Pro สำหรับโปรเจกต์ของคุณ
-        </p>
 
         {/* CTA Buttons */}
         <div 
@@ -172,6 +149,7 @@ export default function HeroSection({ onExploreProducts, onExploreHowToOrder }) 
             maxWidth: 1020,
             width: '100%',
             padding: '0 22px',
+            marginTop: '18vh',
             boxSizing: 'border-box',
             zIndex: 10
           }}

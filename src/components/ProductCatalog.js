@@ -43,7 +43,7 @@ function formatPrice(n) {
 }
 
 export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('mcu');
   const [searchQuery, setSearchQuery] = useState('');
   const [addedId, setAddedId] = useState('');
 
@@ -174,16 +174,7 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                   ) : null}
                 </p>
                 <div className="shop-card-actions">
-                  <button
-                    type="button"
-                    className="shop-learn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      onSelectProduct(featured);
-                    }}
-                  >
-                    ดูเพิ่มเติม
-                  </button>
+
                   <button
                     type="button"
                     className={`liquid-metal-btn ${addedId === featured.id ? 'is-added' : ''}`}
@@ -196,7 +187,7 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                           เพิ่มแล้ว
                         </>
                       ) : (
-                        'ซื้อ'
+                        'เพิ่มสินค้า'
                       )}
                     </span>
                   </button>
@@ -232,16 +223,7 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                     ) : null}
                   </p>
                   <div className="shop-card-actions">
-                    <button
-                      type="button"
-                      className="shop-learn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onSelectProduct(product);
-                      }}
-                    >
-                      ดูเพิ่มเติม
-                    </button>
+
                     <button
                       type="button"
                       className={`liquid-metal-btn ${isAdded ? 'is-added' : ''}`}
@@ -254,7 +236,7 @@ export default function ProductCatalog({ onAddToCart, onSelectProduct }) {
                             เพิ่มแล้ว
                           </>
                         ) : (
-                          'ซื้อ'
+                          'เพิ่มสินค้า'
                         )}
                       </span>
                     </button>

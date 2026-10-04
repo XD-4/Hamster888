@@ -93,8 +93,8 @@ export default function CartDrawer({
   };
 
   return (
-    <div className="drawer-overlay" onClick={onClose}>
-      <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
+    <div className="drawer-overlay cart-overlay" onClick={onClose}>
+      <div className="drawer-panel cart-popover" onClick={(e) => e.stopPropagation()}>
         
         {/* Header */}
         <div style={{
@@ -107,7 +107,7 @@ export default function CartDrawer({
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span style={{ fontSize: '1.4rem' }}>🛍️</span>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)' }}>
-              {checkoutStep === 'cart' ? 'ถุงสินค้าของคุณ' : checkoutStep === 'shipping' ? 'ข้อมูลจัดส่ง & ใบกำกับภาษี' : 'ยืนยันคำสั่งซื้อสำเร็จ'}
+              {checkoutStep === 'cart' ? 'ตะกร้าสินค้าของคุณ' : checkoutStep === 'shipping' ? 'ข้อมูลจัดส่ง & ใบกำกับภาษี' : 'ยืนยันคำสั่งซื้อสำเร็จ'}
             </h3>
           </div>
           <button
@@ -155,10 +155,10 @@ export default function CartDrawer({
                 <div style={{ textAlign: 'center', padding: '60px 0', color: 'var(--apple-text-secondary)' }}>
                   <div style={{ fontSize: '3rem', marginBottom: '16px' }}>📦</div>
                   <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '6px' }}>
-                    ถุงสินค้าของคุณว่างเปล่า
+                    ตะกร้าสินค้าของคุณว่างเปล่า
                   </div>
                   <p style={{ fontSize: '0.88rem' }}>
-                    เลือกชิปเซตหรือเซนเซอร์ที่คุณต้องการแล้วกดหยิบใส่ถุงได้เลย
+                    เลือกชิปเซตหรือเซนเซอร์ที่คุณต้องการแล้วกดหยิบใส่ตะกร้าได้เลย
                   </p>
                 </div>
               ) : (

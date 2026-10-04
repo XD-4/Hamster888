@@ -1,5 +1,4 @@
 export const IOT_CATEGORIES = [
-  { id: 'all', name: 'สินค้าทั้งหมด', icon: '✨' },
   { id: 'mcu', name: 'บอร์ดประมวลผล (MCU & SBC)', icon: '🧠' },
   { id: 'sensor', name: 'เซนเซอร์ & วิชั่น (Sensors)', icon: '👁️' },
   { id: 'wireless', name: 'ไร้สาย & เครือข่าย (IoT / LoRa)', icon: '📡' },

@@ -161,26 +161,46 @@ export default function AppleNavbar({ activeSection, setActiveSection, cartCount
             )}
           </button>
 
-          {/* Bag icon */}
-          <button
-            type="button"
-            onClick={onOpenCart}
-            style={{ width: 36, height: 36, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-primary)', position: 'relative', transition: 'background 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-glass)'}
-            onMouseLeave={e => e.currentTarget.style.background = 'none'}
-          >
-            <svg width="18" height="20" viewBox="0 0 15 17" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M1.5 5.5h12l-.8 10H2.3z" strokeLinejoin="round" />
-              <path d="M4.8 5.5V4a2.7 2.7 0 0 1 5.4 0v1.5" />
-            </svg>
-            {cartCount > 0 && (
-              <span style={{ position: 'absolute', top: 0, right: 0, background: '#FF3B30', color: '#fff', fontSize: '0.65rem', fontWeight: 800, width: 16, height: 16, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                {cartCount}
-              </span>
-            )}
-          </button>
         </div>
       </header>
+
+      {/* Bag icon (Floating top right) */}
+      <button
+        type="button"
+        onClick={onOpenCart}
+        style={{ 
+          position: 'absolute', 
+          right: '32px', 
+          top: '24px',
+          width: '50px', 
+          height: '50px', 
+          borderRadius: '50%', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          background: isDarkMode ? 'rgba(30, 30, 30, 0.85)' : 'rgba(255, 255, 255, 0.85)', 
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: isDarkMode ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid rgba(0, 0, 0, 0.05)',
+          boxShadow: isDarkMode ? '0 10px 25px -5px rgba(0, 0, 0, 0.5)' : '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+          cursor: 'pointer', 
+          color: 'var(--text-primary)', 
+          transition: 'transform 0.2s, background 0.2s',
+          pointerEvents: 'auto'
+        }}
+        onMouseEnter={e => { e.currentTarget.style.transform = 'scale(1.05)'; }}
+        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)'; }}
+      >
+        <svg width="22" height="24" viewBox="0 0 15 17" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M1.5 5.5h12l-.8 10H2.3z" strokeLinejoin="round" />
+          <path d="M4.8 5.5V4a2.7 2.7 0 0 1 5.4 0v1.5" />
+        </svg>
+        {cartCount > 0 && (
+          <span style={{ position: 'absolute', top: -2, right: -2, background: '#0071e3', color: '#fff', fontSize: '0.75rem', fontWeight: 800, width: 22, height: 22, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isDarkMode ? '2px solid #111' : '2px solid #fff' }}>
+            {cartCount}
+          </span>
+        )}
+      </button>
     </div>
     
     <AuthModal 
